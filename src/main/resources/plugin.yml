@@ -1,0 +1,6 @@
+name: AFK
+version: '${project.version}'
+main: com.gmail.ibmesp1.AFK
+api-version: 1.13
+authors: [ Ib ]
+description: AFK plugin
