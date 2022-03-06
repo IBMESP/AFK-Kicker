@@ -28,7 +28,7 @@ public final class AFKKicker extends JavaPlugin {
         version = pdffile.getVersion();
         name = ChatColor.DARK_RED + "[" + pdffile.getName() + "]";
         Logger log = Bukkit.getLogger();
-        afkCheck = getConfig().getLong("secondsInterval")*1000;
+        afkCheck = getConfig().getLong("secondsInterval");
 
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
