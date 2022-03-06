@@ -2,4 +2,7 @@
 minutesAFK: 15
 
 #Checks if a player is AFK every x seconds and stores the data
-secondsInterval: 10
+#More seconds -> Less accuracy less lag
+#Fewer seconds -> More accuracy more lag
+#Find a balance, start trying with fewer seconds
+secondsInterval: 1

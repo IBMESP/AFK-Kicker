@@ -2,6 +2,8 @@ package com.gmail.ibmesp1;
 
 import com.gmail.ibmesp1.events.Events;
 import com.gmail.ibmesp1.utils.AFKChecker;
+import com.gmail.ibmesp1.utils.Metrics;
+import com.gmail.ibmesp1.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -10,6 +12,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public final class AFKKicker extends JavaPlugin {
 
@@ -23,16 +26,26 @@ public final class AFKKicker extends JavaPlugin {
         PluginDescriptionFile pdffile = getDescription();
         version = pdffile.getVersion();
         name = ChatColor.DARK_RED + "[" + pdffile.getName() + "]";
+        Logger log = Bukkit.getLogger();
 
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
         lastInput = new HashMap<>();
         afkChecker = new AFKChecker(this,lastInput).runTaskTimer(this,0,20L);
-        //new Metrics(this,);
+        new Metrics(this,14551);
 
-        Bukkit.getConsoleSender().sendMessage("[AFK] - Version: " + version + " Enabled - By Ib");
+
+        Bukkit.getConsoleSender().sendMessage("[AFK-Kicker] - Version: " + version + " Enabled - By Ib");
         registerEvents();
+
+        /*new UpdateChecker(this,).getLatestVersion(version -> {
+            if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
+                log.info("[AFK-Kicker] AFK-Kicker is up to date");
+            } else {
+                log.warning("[AFK-Kicker] AFK-Kicker has a new update");
+            }
+        });*/
     }
 
     @Override

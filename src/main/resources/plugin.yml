@@ -1,6 +1,6 @@
 name: AFK-Kicker
 version: '${project.version}'
-main: com.gmail.ibmesp1.AFK
+main: com.gmail.ibmesp1.AFKKicker
 api-version: 1.13
 authors: [ Ib ]
 description: AFK plugin
