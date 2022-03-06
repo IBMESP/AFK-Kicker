@@ -1,0 +1,5 @@
+#Time limit
+minutesAFK: 15
+
+#Checks if a player is AFK every x seconds and stores the data
+secondsInterval: 10

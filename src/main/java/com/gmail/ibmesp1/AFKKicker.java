@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.UUID;
 
-public final class AFK extends JavaPlugin {
+public final class AFKKicker extends JavaPlugin {
 
     public String version;
     public String name;
@@ -24,8 +24,11 @@ public final class AFK extends JavaPlugin {
         version = pdffile.getVersion();
         name = ChatColor.DARK_RED + "[" + pdffile.getName() + "]";
 
+        getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
+
         lastInput = new HashMap<>();
-        afkChecker = new AFKChecker(this,lastInput).runTaskTimer(this,0,5*20L);
+        afkChecker = new AFKChecker(this,lastInput).runTaskTimer(this,0,20L);
         //new Metrics(this,);
 
         Bukkit.getConsoleSender().sendMessage("[AFK] - Version: " + version + " Enabled - By Ib");

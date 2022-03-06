@@ -1,9 +1,10 @@
 package com.gmail.ibmesp1.events;
 
-import com.gmail.ibmesp1.AFK;
+import com.gmail.ibmesp1.AFKKicker;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -13,36 +14,32 @@ import java.util.UUID;
 
 public class Events implements Listener {
 
-    private AFK plugin;
+    private final AFKKicker plugin;
     private HashMap<UUID,Long> lastInput;
+    private long afkCheck;
 
-    public Events(AFK plugin,HashMap<UUID,Long> lastInput) {
+    public Events(AFKKicker plugin, HashMap<UUID,Long> lastInput) {
         this.plugin = plugin;
         this.lastInput = lastInput;
+
+        afkCheck = plugin.getConfig().getLong("secondsInterval")*1000;
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player player = e.getPlayer();
 
-        //if(player.hasPermission("afk.bypass")){return;}
+        if(player.hasPermission("afk.bypass")){return;}
 
         lastInput.put(player.getUniqueId(),System.currentTimeMillis());
 
-        //System.out.println("On Join: " + System.currentTimeMillis());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
         Player player = e.getPlayer();
-        long quit = System.currentTimeMillis();
-        long join = lastInput.get(player.getUniqueId());
 
-        //if(player.hasPermission("afk.bypass")){return;}
-        //System.out.println("Join: " + join);
-        //System.out.println("Quit: " + quit);
-
-        //System.out.println("Millis interval: " + (quit - join));
+        if(player.hasPermission("afk.bypass")){return;}
 
         lastInput.remove(player.getUniqueId());
 
@@ -51,15 +48,31 @@ public class Events implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent e){
         Player player = e.getPlayer();
+
+        if(player.hasPermission("afk.bypass")){return;}
+
+        updater(player);
+    }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e){
+        Player player = e.getPlayer();
+
+        if(player.hasPermission("afk.bypass")){return;}
+
+        updater(player);
+    }
+
+    private void updater(Player player){
         long eventTime = System.currentTimeMillis();
         long lastIn = lastInput.get(player.getUniqueId());
         long interval = eventTime - lastIn;
-        long afkTime = 20000;
 
-        if(interval < afkTime){
+        if(interval < afkCheck){
             return;
         }
 
         lastInput.replace(player.getUniqueId(),eventTime);
+
     }
 }

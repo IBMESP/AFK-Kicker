@@ -1,4 +1,4 @@
-name: AFK
+name: AFK-Kicker
 version: '${project.version}'
 main: com.gmail.ibmesp1.AFK
 api-version: 1.13

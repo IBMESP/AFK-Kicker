@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gmail.ibmesp1</groupId>
-    <artifactId>AFK</artifactId>
+    <artifactId>AFK-Kicker</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>AFK</name>
+    <name>AFK-Kicker</name>
 
     <description>AFK plugin</description>
     <properties>
