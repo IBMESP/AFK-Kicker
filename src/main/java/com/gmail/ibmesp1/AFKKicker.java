@@ -20,6 +20,7 @@ public final class AFKKicker extends JavaPlugin {
     public String name;
     public HashMap<UUID,Long> lastInput;
     public BukkitTask afkChecker;
+    public long afkCheck;
 
     @Override
     public void onEnable() {
@@ -27,25 +28,26 @@ public final class AFKKicker extends JavaPlugin {
         version = pdffile.getVersion();
         name = ChatColor.DARK_RED + "[" + pdffile.getName() + "]";
         Logger log = Bukkit.getLogger();
+        afkCheck = getConfig().getLong("secondsInterval")*1000;
 
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
         lastInput = new HashMap<>();
-        afkChecker = new AFKChecker(this,lastInput).runTaskTimer(this,0,20L);
+        afkChecker = new AFKChecker(this,lastInput).runTaskTimer(this,0,afkCheck*20L);
         new Metrics(this,14551);
 
 
         Bukkit.getConsoleSender().sendMessage("[AFK-Kicker] - Version: " + version + " Enabled - By Ib");
         registerEvents();
 
-        /*new UpdateChecker(this,).getLatestVersion(version -> {
+        new UpdateChecker(this,100525).getLatestVersion(version -> {
             if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 log.info("[AFK-Kicker] AFK-Kicker is up to date");
             } else {
                 log.warning("[AFK-Kicker] AFK-Kicker has a new update");
             }
-        });*/
+        });
     }
 
     @Override
