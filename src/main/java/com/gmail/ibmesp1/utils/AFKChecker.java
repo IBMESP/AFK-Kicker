@@ -45,7 +45,7 @@ public class AFKChecker extends BukkitRunnable {
 
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(ChatColor.YELLOW + "You will be kicked on" + ChatColor.GOLD + " 1 " + ChatColor.YELLOW + "seconds"),4*20);
 
-                Bukkit.getScheduler().runTaskLater(plugin, ()-> p.kickPlayer("AFK"),5*20);
+                Bukkit.getScheduler().runTaskLater(plugin, ()-> p.kickPlayer("You have been kicked for being AFK"),5*20);
             }
         }
     }
