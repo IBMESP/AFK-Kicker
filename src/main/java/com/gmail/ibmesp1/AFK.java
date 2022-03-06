@@ -1,21 +1,44 @@
 package com.gmail.ibmesp1;
 
+import com.gmail.ibmesp1.events.Events;
+import com.gmail.ibmesp1.utils.AFKChecker;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 public final class AFK extends JavaPlugin {
 
-    public HashMap<UUID,Long> afk;
+    public String version;
+    public String name;
+    public HashMap<UUID,Long> lastInput;
+    public BukkitTask afkChecker;
 
     @Override
     public void onEnable() {
-        afk = new HashMap<>();
+        PluginDescriptionFile pdffile = getDescription();
+        version = pdffile.getVersion();
+        name = ChatColor.DARK_RED + "[" + pdffile.getName() + "]";
+
+        lastInput = new HashMap<>();
+        afkChecker = new AFKChecker(this,lastInput).runTaskTimer(this,0,5*20L);
+        //new Metrics(this,);
+
+        Bukkit.getConsoleSender().sendMessage("[AFK] - Version: " + version + " Enabled - By Ib");
+        registerEvents();
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+
+    }
+
+    public void registerEvents()
+    {
+        Bukkit.getPluginManager().registerEvents(new Events(this,lastInput),this);
     }
 }
