@@ -1,7 +1,7 @@
 # AFK-Kicker
 AFK kicker spigot plugin
 ## Badges:
-[![Latest Version](https://img.shields.io/badge/Latest%20Version-1.0.1-brightgreen)](https://github.com/IBMESP/AFK-Kicker/releases/latest)
+[![Latest Version](https://img.shields.io/badge/Latest%20Version-1.0.3-brightgreen)](https://github.com/IBMESP/AFK-Kicker/releases/latest)
 <a href="https://www.spigotmc.org/resources/100525/"><img src="https://img.shields.io/spiget/downloads/100525?label=Spigot%20Downloads" alt="Spigot downloads"></a>
 <a href="https://www.spigotmc.org/resources/100525/"><img src="https://img.shields.io/spiget/rating/100525?label=Spigot%20Rating" alt="Spigot rating"></a>
 
