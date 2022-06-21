@@ -6,3 +6,7 @@ minutesAFK: 15
 #Fewer seconds -> More accuracy more lag
 #Find a balance, start trying with fewer seconds
 secondsInterval: 1
+
+# Messages
+kickIn: "&eYou will be kicked on &6%seconds &eseconds"
+kicked: "&cYou have been kicked for being AFK"

@@ -39,7 +39,13 @@ public class Events implements Listener {
     public void onQuit(PlayerQuitEvent e){
         Player player = e.getPlayer();
 
-        if(player.hasPermission("afk.bypass")){return;}
+        if(player.hasPermission("afk.bypass")){
+            if(!lastInput.containsKey(player.getUniqueId())){
+                return;
+            }
+            lastInput.remove(player.getUniqueId());
+            return;
+        }
 
         lastInput.remove(player.getUniqueId());
 
@@ -49,7 +55,13 @@ public class Events implements Listener {
     public void onMove(PlayerMoveEvent e){
         Player player = e.getPlayer();
 
-        if(player.hasPermission("afk.bypass")){return;}
+        if(player.hasPermission("afk.bypass")){
+            if(!lastInput.containsKey(player.getUniqueId())){
+                return;
+            }
+            lastInput.remove(player.getUniqueId());
+            return;
+        }
 
         updater(player);
     }
@@ -58,13 +70,25 @@ public class Events implements Listener {
     public void onChat(AsyncPlayerChatEvent e){
         Player player = e.getPlayer();
 
-        if(player.hasPermission("afk.bypass")){return;}
+        if(player.hasPermission("afk.bypass")){
+            if(!lastInput.containsKey(player.getUniqueId())){
+                return;
+            }
+            lastInput.remove(player.getUniqueId());
+            return;
+        }
 
         updater(player);
     }
 
     private void updater(Player player){
         long eventTime = System.currentTimeMillis();
+
+        if(!lastInput.containsKey(player.getUniqueId())){
+            lastInput.put(player.getUniqueId(),eventTime);
+            return;
+        }
+
         long lastIn = lastInput.get(player.getUniqueId());
         long interval = eventTime - lastIn;
 
@@ -73,6 +97,5 @@ public class Events implements Listener {
         }
 
         lastInput.replace(player.getUniqueId(),eventTime);
-
     }
 }

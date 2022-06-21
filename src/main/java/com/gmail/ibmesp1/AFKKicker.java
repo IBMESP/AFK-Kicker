@@ -3,7 +3,7 @@ package com.gmail.ibmesp1;
 import com.gmail.ibmesp1.events.Events;
 import com.gmail.ibmesp1.utils.AFKChecker;
 import com.gmail.ibmesp1.utils.Metrics;
-import com.gmail.ibmesp1.utils.UpdateChecker;
+import com.gmail.ibmesp1.utils.UpdateCAFK;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -41,7 +41,7 @@ public final class AFKKicker extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("[AFK-Kicker] - Version: " + version + " Enabled - By Ib");
         registerEvents();
 
-        new UpdateChecker(this,100525).getLatestVersion(version -> {
+        new UpdateCAFK(this,100525).getLatestVersion(version -> {
             if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 log.info("[AFK-Kicker] AFK-Kicker is up to date");
             } else {

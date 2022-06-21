@@ -9,12 +9,12 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-public class UpdateChecker {
+public class UpdateCAFK {
 
     private final AFKKicker plugin;
     private int resourceId;
 
-    public UpdateChecker(AFKKicker plugin, int resourceId) {
+    public UpdateCAFK(AFKKicker plugin, int resourceId) {
         this.plugin = plugin;
         this.resourceId = resourceId;
     }
