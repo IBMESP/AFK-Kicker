@@ -1,7 +1,7 @@
 # AFK-Kicker
 AFK kicker spigot plugin
 ## Badges:
-[![Latest Version](https://img.shields.io/badge/Latest%20Version-1.0.3-brightgreen)](https://github.com/IBMESP/AFK-Kicker/releases/latest)
+[![Latest Version](https://img.shields.io/badge/Latest%20Version-1.1.0-brightgreen)](https://github.com/IBMESP/AFK-Kicker/releases/latest)
 <a href="https://www.spigotmc.org/resources/100525/"><img src="https://img.shields.io/spiget/downloads/100525?label=Spigot%20Downloads" alt="Spigot downloads"></a>
 <a href="https://www.spigotmc.org/resources/100525/"><img src="https://img.shields.io/spiget/rating/100525?label=Spigot%20Rating" alt="Spigot rating"></a>
 
@@ -16,7 +16,11 @@ minutesAFK: 15
 #Fewer seconds -> More accuracy more lag
 #Find a balance, start trying with fewer seconds
 secondsInterval: 1
+
+# Messages
+kickIn: "&eYou will be kicked on &6%seconds &eseconds"
+kicked: "&cYou have been kicked for being AFK"
 ```
 
 ### Bypass
-You can grant permission to bypass this AFK kicker with _afk.bypass_ permission
+You can grant permission to bypass this AFK kicker with `afk.bypass` permission
