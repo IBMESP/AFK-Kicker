@@ -69,17 +69,9 @@ public class AFKChecker extends BukkitRunnable {
                 if(plugin.getConfig().getLong("secondsInterval") > 1) {
                     lastInput.remove(p.getUniqueId());
 
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("5")),0);
+                    for(int i=5;i<1;i--)
+                        Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn(n.toString())),20);
 
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("4")),20);
-
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("3")),2*20);
-
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("2")),3*20);
-
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("1")),4*20);
-
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.kickPlayer(plugin.getConfig().getString("kicked")),5*20);
                     return;
                 }
                 lastInput.remove(p.getUniqueId());
