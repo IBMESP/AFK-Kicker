@@ -12,7 +12,7 @@
  *
  * Violations will result in a ban of your plugin and account from bStats.
  */
-package com.gmail.ibmesp1.utils;
+package com.gmail.ibmesp1.afk.utils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

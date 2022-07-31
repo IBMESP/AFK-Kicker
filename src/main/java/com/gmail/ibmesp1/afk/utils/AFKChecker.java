@@ -1,6 +1,6 @@
-package com.gmail.ibmesp1.utils;
+package com.gmail.ibmesp1.afk.utils;
 
-import com.gmail.ibmesp1.AFKKicker;
+import com.gmail.ibmesp1.afk.AFKKicker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AFKChecker extends BukkitRunnable {
 
@@ -69,17 +70,13 @@ public class AFKChecker extends BukkitRunnable {
                 if(plugin.getConfig().getLong("secondsInterval") > 1) {
                     lastInput.remove(p.getUniqueId());
 
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("5")),0);
+                    AtomicInteger count = new AtomicInteger(5);
+                    Bukkit.getScheduler().runTaskTimer(plugin, task -> {
+                        p.sendMessage(kickIn(String.valueOf(count.getAndDecrement())));
+                        if(count.get() == 0) task.cancel();
+                    }, 0, 20);
 
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("4")),20);
-
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("3")),2*20);
-
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("2")),3*20);
-
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.sendMessage(kickIn("1")),4*20);
-
-                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.kickPlayer(plugin.getConfig().getString("kicked")),5*20);
+                    Bukkit.getScheduler().runTaskLater(plugin, ()-> p.kickPlayer(ChatColor.translateAlternateColorCodes('&',plugin.getConfig().getString("kicked"))),5*20);
                     return;
                 }
                 lastInput.remove(p.getUniqueId());
@@ -92,7 +89,7 @@ public class AFKChecker extends BukkitRunnable {
     private String kickIn(String seconds){
         String msg = plugin.getConfig().getString("kickIn");
 
-        String msgR = msg.replace("%seconds",seconds);
+        String msgR = msg.replace("%seconds%",seconds);
 
         return ChatColor.translateAlternateColorCodes('&',msgR);
     }

@@ -1,6 +1,6 @@
-package com.gmail.ibmesp1.events;
+package com.gmail.ibmesp1.afk.events;
 
-import com.gmail.ibmesp1.AFKKicker;
+import com.gmail.ibmesp1.afk.AFKKicker;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

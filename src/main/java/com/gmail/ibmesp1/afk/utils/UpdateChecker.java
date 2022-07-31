@@ -1,6 +1,6 @@
-package com.gmail.ibmesp1.utils;
+package com.gmail.ibmesp1.afk.utils;
 
-import com.gmail.ibmesp1.AFKKicker;
+import com.gmail.ibmesp1.afk.AFKKicker;
 import org.bukkit.Bukkit;
 
 import java.io.IOException;
@@ -9,12 +9,12 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-public class UpdateCAFK {
+public class UpdateChecker {
 
     private final AFKKicker plugin;
     private int resourceId;
 
-    public UpdateCAFK(AFKKicker plugin, int resourceId) {
+    public UpdateChecker(AFKKicker plugin, int resourceId) {
         this.plugin = plugin;
         this.resourceId = resourceId;
     }
